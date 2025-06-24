@@ -6,15 +6,16 @@ module.exports = {
 
         const claimer = interaction.user;
         const ticketChannel = interaction.channel;
-        //const ticketOwner = ticketChannel.name.split("'s")[0];
-        //const ticketOwnerId = interaction.guild.members.cache.find(member => member.user.username === ticketOwner).id;
+        const ticketOwner = ticketChannel.name.split("s-ticket")[0];
+        const ticketOwnerId = interaction.guild.members.cache.find(member => member.user.username === ticketOwner).id;
 
-        if (!claimer.roles.cache.has(modRole)) {
+        if (!interaction.member.roles.cache.has(modRole)) {
             return interaction.reply({ content: 'You do not have permission to claim this ticket.', flags: 64 });
         }
 
         try {
             interaction.message.send('Ticket claimed by ' + interaction.user.username);
+            
             await ticketChannel.permissionOverwrites.edit(ticketOwnerId, {
                 SendMessages: true,
             });
