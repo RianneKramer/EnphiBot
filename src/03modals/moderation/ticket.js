@@ -55,6 +55,11 @@ module.exports = {
                     .setLabel('Close')
                     .setStyle(ButtonStyle.Danger)
                     .setEmoji('🔒'),
+                new ButtonBuilder()
+                    .setCustomId('deleteTicker')
+                    .setLabel('Delete')
+                    .setStyle(ButtonStyle.Secondary)
+                    .setEmoji('🗑️')
             );
 
         await ticketChannel.send({ embeds: [embed], components: [row] });
