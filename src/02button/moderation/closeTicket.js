@@ -62,14 +62,14 @@ module.exports = {
             // Send the embed as a DM to the ticket creator
             await interaction.guild.members.cache.get(ticketOwnerId).send({ embeds: [embed] });
 
-            await ticketChannel.delete();
+            // await ticketChannel.delete();
 
             // Reply to the interaction
-            await submittedInteraction.reply({ content: 'The ticket has been closed and the user has been notified.', flags: 64 });
+            await submittedInteraction.reply({ content: 'The ticket has been closed and the user has been notified.\nThe channel will close in 24 hours', flags: 64 });
 
         } catch (error) {
             console.error('There was an error closing the ticket:', error);
-            await interaction.reply({ content: 'There was an error closing the ticket. Please try again later.', ephemeral: true });
+            await interaction.reply({ content: 'There was an error closing the ticket. Please try again later.', flags: 64});
         }
     }
 };
