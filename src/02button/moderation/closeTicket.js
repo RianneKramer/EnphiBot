@@ -7,7 +7,8 @@ module.exports = {
 
         const ticketChannel = interaction.channel;
         const ticketOwner = ticketChannel.name.split("s-ticket")[0];
-        const ticketOwnerId = interaction.guild.members.cache.find(member => member.user.username === ticketOwner).id;
+        const ticketOwnerName = interaction.guild.members.cache.find(member => member.user.username === ticketOwner)
+        const ticketOwnerId = interaction.guild.members.cache.find(ticketOwnerName).id;
 
         const modal = new ModalBuilder()
             .setCustomId('closeTicket')
@@ -59,7 +60,7 @@ module.exports = {
             };
 
             // Reply to the interaction
-            await submittedInteraction.reply({ content: 'The ticket has been closed and the user has been notified.\nThe channel will close in 24 hours'});
+            await submittedInteraction.reply(`The ticket has been closed, ${ticketOwnerName}.\nThe channel will close in 24 hours`);
 
             // Send the embed as a DM to the ticket creator
             await interaction.guild.members.cache.get(ticketOwnerId).send({ embeds: [embed] });
