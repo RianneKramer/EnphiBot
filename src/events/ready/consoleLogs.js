@@ -2,7 +2,7 @@ const { ActivityType, WelcomeChannel, EmbedBuilder } = require('discord.js');
 const { welcomeChannel } = require('../../../config.json')
 
 module.exports = (client) => {
-    console.log(`${client.user.tag} is online.`);
+    console.log(`${client.user.tag} is online.\nYou are on the ALPHA branch, this is only for development and testing purposes`);
     client.user.setActivity({
         name: "Enphia",
         type: ActivityType.Listening,
