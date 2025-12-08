@@ -59,13 +59,13 @@ module.exports = {
                 timestamp: new Date()
             };
 
+            // Reply to the interaction
+            await submittedInteraction.reply({ content: 'The ticket has been closed and the user has been notified.\nThe channel will close in 24 hours'});
+
             // Send the embed as a DM to the ticket creator
             await interaction.guild.members.cache.get(ticketOwnerId).send({ embeds: [embed] });
 
             // await ticketChannel.delete();
-
-            // Reply to the interaction
-            await submittedInteraction.reply({ content: 'The ticket has been closed and the user has been notified.\nThe channel will close in 24 hours', flags: 64 });
 
         } catch (error) {
             console.error('There was an error closing the ticket:', error);
