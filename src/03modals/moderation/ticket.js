@@ -56,7 +56,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Danger)
                     .setEmoji('🔒'),
                 new ButtonBuilder()
-                    .setCustomId('deleteTicker')
+                    .setCustomId('deleteTicket')
                     .setLabel('Delete')
                     .setStyle(ButtonStyle.Secondary)
                     .setEmoji('🗑️')
