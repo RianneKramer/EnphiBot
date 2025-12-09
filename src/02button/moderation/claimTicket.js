@@ -4,9 +4,9 @@ module.exports = {
     name: 'claimTicket',
     callback: async (client, interaction) => {
 
-        const claimer = interaction.user;
+        const claimerId = interaction.user.id;
         const ticketChannel = interaction.channel;
-        const ticketOwner = ticketChannel.name.split("s-ticket")[0];
+        const ticketOwner = ticketChannel.name.split(`-s-ticket`)[0];
         const ticketOwnerId = interaction.guild.members.cache.find(member => member.user.username === ticketOwner).id;
 
         if (!interaction.member.roles.cache.has(modRole)) {
@@ -14,14 +14,14 @@ module.exports = {
         }
 
         try {
-            interaction.message.send('Ticket claimed by ' + interaction.user.username);
-            
             await ticketChannel.permissionOverwrites.edit(ticketOwnerId, {
                 SendMessages: true,
             });
-            await ticketChannel.permissionOverwrites.edit(claimer.id, {
+            await ticketChannel.permissionOverwrites.edit(claimerId, {
                 SendMessages: true,
             });
+
+            await interaction.message.reply(`Ticket claimed by ${interaction.user}`);
             
         } catch (error) {
             console.log('There was an error claiming the ticket: ', error);

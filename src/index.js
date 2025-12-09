@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const { Client, IntentsBitField } = require('discord.js');
 const eventHandler = require('./handlers/eventHandler');
+const { startTicketWorker } = require('./tickets/worker');
 
 const client = new Client({
     intents: [
@@ -13,6 +14,11 @@ const client = new Client({
 }); 
 
 eventHandler(client);
+
+client.once('clientReady', () => {
+    startTicketWorker(client);
+    console.log('Ticket worker started.');
+});
 
 client.login(process.env.TOKEN);
 

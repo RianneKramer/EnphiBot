@@ -1,5 +1,6 @@
 const {modRole} = require('../../../config.json');
 const { ModalBuilder, TextInputBuilder, ActionRowBuilder, TextInputStyle } = require('discord.js');
+const { schedule } = require('../../tickets/store.js');
 
 module.exports = {
     name: 'closeTicket',
@@ -61,6 +62,10 @@ module.exports = {
 
             // Reply to the interaction
             await submittedInteraction.reply(`The ticket has been closed, ${ticketOwnerName}.\nThe channel will close in 24 hours`);
+
+            // Schedule the ticket for deletion in 24 hours
+            const deleteTime = Date.now() + 24 * 60 * 60 * 1000; // 24 hours from now
+            schedule(ticketChannel.id, deleteTime);
 
             // Send the embed as a DM to the ticket creator
             await interaction.guild.members.cache.get(ticketOwnerId).send({ embeds: [embed] });
