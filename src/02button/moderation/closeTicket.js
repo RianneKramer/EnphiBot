@@ -6,7 +6,7 @@ module.exports = {
     callback: async (client, interaction) => {
 
         const ticketChannel = interaction.channel;
-        const ticketOwner = ticketChannel.name.split("s-ticket")[0];
+        const ticketOwner = ticketChannel.name.split("-s-ticket")[0];
         const ticketOwnerName = interaction.guild.members.cache.find(member => member.user.username === ticketOwner)
         const ticketOwnerId = interaction.guild.members.cache.find(member => member.user.username === ticketOwner).id;
 
