@@ -7,7 +7,7 @@ module.exports = {
     callback: async (client, interaction) => {
 
         const ticketChannel = await interaction.guild.channels.create({
-            name: `${interaction.user.username}'s ticket`,
+            name: `${interaction.user.username}-ticket`,
             type: ChannelType.GuildText,
             permissionOverwrites: [
                 {
